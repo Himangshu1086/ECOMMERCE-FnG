@@ -1,0 +1,35 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.item{
+    display: flex;
+}
+.item_image img
+{
+    width: 200px;
+    margin: 10px;
+}
+
+.item_description{
+
+    margin: 10px 20px;
+}
+
+.item_description p{
+    font-size: 15px;
+}
+.item_description button{
+    background-color: rgb(24, 134, 153);
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    margin:10px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: rgb(17, 96, 110);
+}

@@ -1,0 +1,62 @@
+body{
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.checkout_container{
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 20px;
+    height: 100vh;
+}
+.checkout_left{
+    width: 70%;
+    justify-content: left;
+    padding: 10px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.checkout_right{
+    width: 30%;
+    justify-content: left;
+    padding: 10px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+.checkout_right_items_box{
+    background-color: rgb(4 ,79, 77);
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.button > button{
+    background-color: rgb(24, 134, 153);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    outline: none;
+
+}
+
+.rupee > span {
+   
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.rupee{
+        padding: 30px;
+        padding-left: 0px;
+        border-radius: 5px;
+    }
+
+    .checkout_items > div{
+        border-bottom: solid white 2px;
+        border-radius: 3px ;
+        margin: 10px 0px;
+    }
