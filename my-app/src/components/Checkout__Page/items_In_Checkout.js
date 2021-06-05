@@ -1,23 +1,28 @@
 import React from 'react'
-import { useStateValue } from '../../ContextApi/StateProvider';
 import '../../static/Checkout__Page/items_In_Checkout.css';
 
-function Items_In_Checkout({id , title , image ,price}) {
-  const [{basket} , dispatch] = useStateValue();
+function Items_In_Checkout({id , title , image ,price , quantity}) {
+ 
+  const RemoveFromCart = async (id)=>{
 
-  const RemoveFromCart = ()=>{
+  const res =   await fetch("/cart", {
+      method:"DELETE",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({productId:id})
+    });
 
-    dispatch({
-      type:'REMOVE_FROM_CART',
-      id:id,
-    })
+    const res2 = res.json();
+    window.location.reload();
+
   }
   
   return (
         
             <div className="item" >
                 <div className="item_image">
-                  <img
+                  <img style={{width:"200px" , height:"200px"}}
                     src={image}
                     alt="item"
                   />
@@ -25,10 +30,10 @@ function Items_In_Checkout({id , title , image ,price}) {
                 <div className="item_description">
                   <p>{title}</p>
                   <p>Rs : {price}</p>
-                  <button onClick={RemoveFromCart}>Remove</button>
+                  <strong>quantity : {quantity}</strong>
+                  <button onClick={()=>{RemoveFromCart(id)}}>Remove</button>
                 </div>
-                
-              </div>
+            </div>
     )
 }
 

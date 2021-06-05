@@ -1,11 +1,36 @@
-import React, { useEffect } from 'react'
+import React , { useEffect , useState } from 'react';
 import '../../static/Home__Page/Home.css'
 import Product from './Product';
-import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
-import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
+import {Link} from 'react-router-dom';
+
 
 function Home() {
-  const image__slide = ['1.jpg' , '2.jpg' , '3.jpg' , '4.jpg' ,'5.jpg']
+  const id = [1,2,3,4,5]
+  const [ productData , setProductData] = useState({});
+  const [loading , setLoading] = useState(true);
+
+  
+  useEffect(async ()=>{
+
+      const res = await fetch("/getProduct" , {
+      method:"GET" ,
+      headers:{
+        Accept:"application/json",
+        "Content-Type":"application/json"
+  
+      } , 
+      credentials:"include"
+    });
+    const res2 = await res.json();
+    setProductData(res2);
+    console.log(res2)
+    setLoading(false);
+  },[]);
+
+
+  if(loading) return <>loading..</>
+
+
 
   return (
     <div> 
@@ -41,8 +66,8 @@ function Home() {
             <br/><span>Category one...</span><br/>
       </div>
         <div className="product__box__type__one">
-            <Product id="3" title ="description" price ='322' image='3.jpg' />
-            <Product id= "5" title ="description" price ='342' image='5.jpg' />
+            <Product id={productData[0]._id} title = {productData[0].productName} price ={productData[0].MRP} image={productData[0].image} />
+            <Product id= {productData[1]._id} title ={productData[1].productName} price ={productData[1].MRP} image={productData[1].image} />
             <Product id="2" title ="description" price ='3262' image='2.jpg' />
             <Product id="3" title ="description" price ='3232' image='3.jpg' />
             <Product id="1" title ="description" price ='3422' image='1.jpg' />
@@ -141,21 +166,30 @@ function Home() {
             <br/><span>Explore more...</span><br/>
         </div>
         <div className="product__category__container">
+
+          <Link to={"/" + id[0]}>
+            <div className="product__category__block">
+            <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
+          </div>
+          </Link>
+          <Link to={"/" + id[1]}>
+          <div className="product__category__block">
+            <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
+          </div></Link>
+          <Link to={"/" + id[2]}>
           <div className="product__category__block">
             <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
           </div>
+          </Link>
+          <Link to={"/" + id[3]}>
           <div className="product__category__block">
             <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
-          </div>
+          </div></Link>
+          <Link to={"/" + id[4]}>
           <div className="product__category__block">
             <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
-          </div>
-          <div className="product__category__block">
-            <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
-          </div>
-          <div className="product__category__block">
-            <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
-          </div>
+          </div></Link>
+          
           <div className="product__category__block">
             <img src="https://images.unsplash.com/photo-1486328228599-85db4443971f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"  style={{width:"200px" , height:"200px"}}/>
           </div>
@@ -220,4 +254,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Home;

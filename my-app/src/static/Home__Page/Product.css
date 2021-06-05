@@ -16,6 +16,7 @@ background-color: rgb(226, 226, 226);
 
 .product__item__box__container_one img{
     width:200px;
+    height: 133px;
     border-radius: 5px;
 }
 .product__item__box__container_two{

@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 
 require('../DATABASE/initDB');
 const User = require('../MODELS/userSchema');
-const authenticate = require('../MIDDLEWARE/Authenticate');
+const Cart = require('../MODELS/cartSchema')
 
 
 router.use(cookieParser());
@@ -32,12 +32,9 @@ router.use(cookieParser());
 router.post('/register', async (req , res )=>{
 
      const { firstName , lastName , mobileNumber , email ,password , conformPass } = req.body;
-
-     console.log(req.body)
-
     if (!firstName || !lastName || !mobileNumber  ||  !password || !conformPass )
     {
-        return res.status().json({error:"plz fill the details"})
+        return res.status(422).json({error:"plz fill the details"})
     }
 
     try{
@@ -53,9 +50,12 @@ router.post('/register', async (req , res )=>{
         }
         else{
             const user = new User({firstName , lastName , mobileNumber , email ,password , conformPass} );
-    
+
             await user.save();
             
+            const cart = new Cart({user:user._id})
+            await cart.save();
+
             res.status(200).json({ message:"user registered successfully" })
         }
         

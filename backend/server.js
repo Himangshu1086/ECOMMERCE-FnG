@@ -2,16 +2,17 @@ const dotenv = require("dotenv")
 const express = require('express')
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
 dotenv.config({path:"./config.env"});
 require('./DATABASE/initDB');
 
-app.use(express.json());
-// app.use(express.urlencoded({extended:true}))
 
 // link the router files 
 app.use(require('./ROUTER/product'))
 app.use(require('./ROUTER/auth'));
+app.use(require("./ROUTER/cart"));
 
 
 

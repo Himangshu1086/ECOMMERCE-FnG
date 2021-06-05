@@ -6,9 +6,10 @@ import Footer from './components/Footer/Footer';
 import { BrowserRouter as  Router,Switch,Route } from 'react-router-dom';
 import Sign_In from './components/Sign__In__Page/Sign_In';
 import Sign_Up from './components/Sign__In__Page/Sign_Up';
-import createProduct from './components/Admin/createProduct';
-
-
+import CreateProduct from './components/Admin/CreateProduct';
+import Account from './components/Account/Account';
+import ProductDesp from './components/DynamicRoutes/ProductDesp';
+import PageNotFound from './components/PageNotFound';
 
 
 function App() {
@@ -30,13 +31,20 @@ function App() {
             <Sign_Up/>
           </Route>
           <Route path="/admin">
-            <createProduct/>
+            <CreateProduct/>
           </Route>
-
-          
-          <Route path="/" >
+          <Route path="/account">
+            <Account/>
+          </Route> 
+          <Route path="/product/:id">
+            <ProductDesp/>
+            </Route>        
+          <Route path="/" exact={true}>
               <Home/>
           </Route>   
+          <Route path="*" exact={true} >
+              <PageNotFound/>
+            </Route>
           
         </Switch>
         

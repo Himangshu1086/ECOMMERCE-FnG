@@ -1,47 +1,23 @@
-import React ,{useEffect} from 'react'
+import React  , { useEffect }  from 'react'
 import { useStateValue } from '../../ContextApi/StateProvider';
-import '../../static/Home__Page/Product.css'
+import '../../static/Home__Page/Product.css';
+import { Link } from 'react-router-dom';
 
 
 function Product({id ,title , price , image}) {
   
-
-
-    const [{basket} , dispatch] = useStateValue();
-
-
-
-    const addToBasket = () =>{
-        // dispatch the item into the data layer 
-        dispatch({
-            type:'ADD_TO_BASKET',
-            item:{
-                id:id,
-                title:title,
-                image:image,
-                price :price,
-                
-            },
-        })
-        
-    }
-
-
-
-  
-
-
     return (
         <div className="product__item__box__container">
            <div className="product__item__box__container_one">
-                <img src={image}  alt="item"/>
-                <button onClick={addToBasket} className="addToCartButton">Add to cart</button> 
+                <img src={image}   alt="item"/>
+                <Link to={`/product/${id}`}><button  className="addToCartButton">View</button></Link>
+                
             </div>
             
             <div className="product__item__box__container_two">
             
-                <p>{title}</p>
-                <span>Rs : {price} ( 1kg )</span>
+                <p style={{fontWeight:"lighter" }}>{title}</p>
+                <span style={{ fontWeight:"bolder",fontSize:"18px",color:"rgb(20, 121, 161)" , letterSpacing:"1px"}} >₹ {price} </span>(weight)
             </div>
                   
         </div>

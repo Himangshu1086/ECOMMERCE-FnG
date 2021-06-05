@@ -5,7 +5,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CategoryOutlinedIcon from '@material-ui/icons/CategoryOutlined';
 import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 import {Link , useHistory} from 'react-router-dom'
-import { useStateValue } from '../ContextApi/StateProvider';
 import Cookies from 'universal-cookie';
 
 
@@ -13,23 +12,14 @@ import Cookies from 'universal-cookie';
 
 function Header() {
 
-  const [{basket}  , dispatch] = useStateValue();
   const [ userData , setUserData] = useState({});
   const [loading , setLoading] = useState(true);
   const history = useHistory();
   
+
   const cookies = new Cookies();
   const  userToken  = cookies.get("token");
-  
 
-let user = false ;
-
-if(userToken){
-  user = true
-}
-else{
-  user = false
-}
 
 useEffect( async ()=>{
 
@@ -53,7 +43,6 @@ useEffect( async ()=>{
   }
 
 },[]);
-
 
 
   
@@ -82,9 +71,13 @@ if(loading)
   
 
   <div className="topnav-right">
-  <span><CategoryOutlinedIcon></CategoryOutlinedIcon>
+    
+    <Link to ="/">
+    <span><CategoryOutlinedIcon></CategoryOutlinedIcon>
   <br/>Category
   </span>
+    </Link>
+  
 
   <Link to="/signIn">
               <span><PermIdentityOutlinedIcon></PermIdentityOutlinedIcon>
@@ -93,7 +86,7 @@ if(loading)
 
 <Link to="/checkout">
     <span><ShoppingCartOutlinedIcon></ShoppingCartOutlinedIcon>
-  <br/>Cart ({basket?.length}) 
+  <br/>Cart (₹ 0) 
   </span>
 </Link>
   
@@ -105,12 +98,6 @@ if(loading)
 
   )
 
-
-
-
-
-
-console.log(userData.user.firstName);
     
 
 const logoutUser = ()=>{
@@ -133,12 +120,11 @@ return (
     </Link>
   </div>
 
-   
 
   <div className="topnav-search-bar">
       
   
-        <p>Hello,{userData.user.firstName}</p> 
+        <p><Link to="/account" className="userName">Hello,{userData.user.firstName}</Link></p>
         <input type="text" placeholder="search your product"></input>
         <span><SearchIcon style={{fontSize : 20}}></SearchIcon></span>
 
@@ -146,11 +132,13 @@ return (
   
 
   <div className="topnav-right">
+    <Link to="/admin">
     <span><CategoryOutlinedIcon></CategoryOutlinedIcon>
     <br/>Category
     </span>
+    </Link>
 
-  <Link to="/signIn">
+  <Link to="/account">
     <span><PermIdentityOutlinedIcon></PermIdentityOutlinedIcon>
     <br/>Account
     </span>
@@ -162,7 +150,7 @@ return (
 
   <Link to="/checkout">
       <span><ShoppingCartOutlinedIcon></ShoppingCartOutlinedIcon>
-      <br/>Cart ({basket?.length}) 
+      <br/>Cart 
       </span>
   </Link>
   

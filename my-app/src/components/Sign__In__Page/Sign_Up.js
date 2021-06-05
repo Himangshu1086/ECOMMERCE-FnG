@@ -53,6 +53,9 @@ function Sign_Up() {
 
     }
 
+
+
+    
     return (
         <div>
             <div className="sign__up__container" >

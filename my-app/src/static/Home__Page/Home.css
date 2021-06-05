@@ -26,14 +26,14 @@ body::-webkit-scrollbar {
   }
 
 .home__page__heading{
-    margin-top: 260px;
-    height: 66vh;
+    margin-top: 200px;
+    height: 61vh;
 }
 .home__page__heading h1{
     padding: 20px;
     text-align: center;
     color: white;
-    font-size:  6.05882em;
+    font-size:  5.05882em;
     border-bottom: solid 4px white;
     margin: 0px 200px;
     letter-spacing: 5px;
@@ -105,7 +105,7 @@ body::-webkit-scrollbar {
     position: absolute;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 5.15vw);
+    grid-template-rows: repeat(8, 4.8vw);
     grid-gap: 8px;
     margin: 8px;
     

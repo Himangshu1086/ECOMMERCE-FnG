@@ -1,8 +1,8 @@
 
 .topnav {
-    position: sticky;
+ 
     background-color:transparent !important;
-    font-size: 20px;
+    font-size: 17px;
     overflow: hidden;
     display: flex;
 
@@ -60,16 +60,20 @@ text-align: center;
 
 .topnav-search-bar p{
 
-    color: white;
+    
     margin: 30px 0px;
     background-color: rgb(18, 151, 151);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    text-align: center;
+    
     flex: 1;
     padding: 10px 20px;
     }
 
+    .userName{
+      color: white;
+      text-decoration: none;
+    }
 
   .topnav-right span {
     float: left;
