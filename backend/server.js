@@ -13,7 +13,7 @@ require('./DATABASE/initDB');
 app.use(require('./ROUTER/product'))
 app.use(require('./ROUTER/auth'));
 app.use(require("./ROUTER/cart"));
-
+app.use(require('./ROUTER/payment'));
 
 
 
@@ -23,3 +23,5 @@ const PORT = process.env.PORT
 app.listen( PORT , ()=>{
     console.log(`server connected IN PORT ${PORT}`)
 })
+
+

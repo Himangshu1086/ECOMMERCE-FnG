@@ -4,6 +4,7 @@ import { useStateValue } from "../../ContextApi/StateProvider";
 import "../../static/Checkout__Page/Checkout.css";
 import '../../static/Checkout__Page/items_In_Checkout.css';
 import Cookies from 'universal-cookie';
+import axios from "axios";
 
 
 
@@ -17,22 +18,18 @@ function Checkout() {
   let price =0;
   let items =0;
 
-const cartProductId = async()=>{
 
-    try {
-      const res = await fetch("/cart");
-      const productOfCart = await res.json();
-      setAddedProducts(productOfCart);
-      setLoading(false);
-      
-    }catch(err){
-      console.log(err);
-    }
-}
+useEffect( async()=>{
 
-useEffect( ()=>{
-
-  cartProductId();
+  try {
+    const res = await fetch("/cart");
+    const productOfCart = await res.json();
+    setAddedProducts(productOfCart);
+    setLoading(false);
+    
+  }catch(err){
+    console.log(err);
+  }
   
 
   },[])
@@ -55,6 +52,71 @@ useEffect( ()=>{
     }
 
     
+    function loadScript(src) {
+      return new Promise((resolve) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.onload = () => {
+              resolve(true);
+          };
+          script.onerror = () => {
+              resolve(false);
+          };
+          document.body.appendChild(script);
+      });
+}
+
+
+const displayRazorpay = async() =>{
+      
+    const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+    )
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+              }
+
+    
+     // create an order          
+
+    const result = await fetch("/checkout/orders" , {method:"POST"});
+    const data = await result.json();
+    console.log(data);
+     if (!result) {
+      alert("Server error. Are you online?");
+      return;}
+    
+      // pop up window for payments
+
+     const options = {
+
+      key: "rzp_test_ZVmoR7VianmWFt", 
+      amount:data.amount.toString(),
+      currency:data.currency,
+      name: "Soumya Corp.",
+      description: "Test Transaction",
+      image:"https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80", 
+      order_id:data.id,      
+      "handler": async function (response) {
+            alert(response.razorpay_payment_id)
+            alert(response.razorpay_order_id)
+            alert(response.razorpay_signature)
+      },
+      prefill: {
+          name: "",
+          email: "",
+          contact: "",
+      }
+  };
+
+  const paymentObject = new window.Razorpay(options);
+  paymentObject.open();
+     
+}
+
+
+
     
 if(loading) return <>loading...</>
 
@@ -116,13 +178,12 @@ if(loading) return <>loading...</>
             <span>SubTotal( {items} items ) : ₹ {price} </span>
             </div>
             <div className="button">
-              <button>Proceed to Checkout</button>
+              <button onClick={displayRazorpay} >Proceed to Checkout</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  );         
 }
-
 export default Checkout;
