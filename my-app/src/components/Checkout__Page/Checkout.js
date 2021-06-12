@@ -4,7 +4,6 @@ import { useStateValue } from "../../ContextApi/StateProvider";
 import "../../static/Checkout__Page/Checkout.css";
 import '../../static/Checkout__Page/items_In_Checkout.css';
 import Cookies from 'universal-cookie';
-import axios from "axios";
 
 
 
@@ -80,34 +79,39 @@ const displayRazorpay = async() =>{
     
      // create an order          
 
-    const result = await fetch("/checkout/orders" , {method:"POST"});
-    const data = await result.json();
-    console.log(data);
-     if (!result) {
+    const result = await fetch("/checkout/orders" , {method:"POST" ,headers:{"Content-Type":"application/json"}, body:JSON.stringify({price})});
+    if (!result) {
       alert("Server error. Are you online?");
       return;}
+    const data = await result.json();
+    console.log(data);
+     
     
       // pop up window for payments
 
      const options = {
 
       key: "rzp_test_ZVmoR7VianmWFt", 
-      amount:data.amount.toString(),
+      amount:data.amount,
       currency:data.currency,
-      name: "Soumya Corp.",
+      name: "FnG Private Limited",
       description: "Test Transaction",
       image:"https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80", 
       order_id:data.id,      
       "handler": async function (response) {
-            alert(response.razorpay_payment_id)
-            alert(response.razorpay_order_id)
-            alert(response.razorpay_signature)
+            // alert(response.razorpay_payment_id)
+            // alert(response.razorpay_order_id)
+            // alert(response.razorpay_signature)
+            alert("Payment is Successful")
       },
       prefill: {
-          name: "",
-          email: "",
-          contact: "",
-      }
+          name: "himangshu baishya",
+          email: "himangshu@himanghsu.com",
+          contact: "8638281845",
+      },
+      "theme": {
+        "color": "#000000"
+    }
   };
 
   const paymentObject = new window.Razorpay(options);
@@ -146,8 +150,8 @@ if(loading) return <>loading...</>
               (userToken) ?
               addedProducts.map(item =>(
                 <>
-               { price = price + (item.orderedQuantity * item.product.DiscountPrice)}
-               { items = items + item.orderedQuantity}
+              <p style={{display:"none"}}> { price = price + (item.orderedQuantity * item.product.DiscountPrice)}
+               { items = items + item.orderedQuantity}</p>
                 <div className="item" >
                     <div className="item_image">
                       <img style={{width:"200px" , height:"200px"}}
