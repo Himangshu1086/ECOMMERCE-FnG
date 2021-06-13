@@ -60,3 +60,59 @@ body{
         border-radius: 3px ;
         margin: 10px 0px;
     }
+
+
+
+/* ADDRESS FORM  */
+
+.__address_box{
+    display: flex;
+    background-color:rgb(4, 61, 59);
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+
+.input__radio{
+    margin: 7px;
+}
+
+.delAddress{
+    position: relative;
+    float: left;
+    cursor: pointer;
+    width: 100%;
+    
+}
+
+.delHeading{
+    line-height: 1.5;
+}
+
+.__deLName{
+    font-weight: 500;
+}
+
+.__tagName{
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #878787;
+    vertical-align: middle;
+    padding: 4px 7px;
+    border-radius: 2px;
+    background-color: #f0f0f0;
+    font-weight: 500;
+}
+
+.__delMobile{
+    margin: 0 0 0 11px;
+}
+.__delAddress{
+    margin-top: 10px;
+    display: block;
+    line-height: 1.5;
+}
+
+.__delPin{
+    font-weight: 500;
+}

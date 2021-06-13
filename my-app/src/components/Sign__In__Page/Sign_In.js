@@ -68,7 +68,7 @@ return(
           <span>PASSWORD</span>
 
           <input type="password" placeholder="password"
-          required autoFocus
+          required autoFocus autoComplete
           name="mobileNumber"
           value={password}
           onChange={(e)=>{setPassword( e.target.value)}}

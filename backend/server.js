@@ -14,6 +14,7 @@ app.use(require('./ROUTER/product'))
 app.use(require('./ROUTER/auth'));
 app.use(require("./ROUTER/cart"));
 app.use(require('./ROUTER/payment'));
+app.use(require('./ROUTER/account'));
 
 
 
